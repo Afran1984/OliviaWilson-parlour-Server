@@ -29,13 +29,29 @@ async function run() {
 
     // connect database & collection
     const oliviaSearvices = client.db("Olivia-Wilson-DB").collection("Olivia-Services");
+    // Reviwes
+    const oliviaReviews = client.db("Olivia-Wilson-DB").collection("reviews");
+    // Team-Member
+    const oliviaTeamMember = client.db("Olivia-Wilson-DB").collection("Team-Member");
 
-    // Get data & show display
-
+    // Services Get data & show display
     app.get('/services', async(req, res) => {
         const result = await oliviaSearvices.find().toArray();
         res.send(result);
     })
+
+    // Reviews Get data & show Display
+    app.get('/reviews', async(req, res) => {
+      const result = await oliviaReviews.find().toArray();
+      res.send(result);
+    })
+
+    // Team-Member Get data & show Display
+    app.get('/teammember', async(req, res) => {
+      const result = await oliviaTeamMember.find().toArray();
+      res.send(result);
+    })
+
 
 
 
