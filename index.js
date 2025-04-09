@@ -29,10 +29,15 @@ async function run() {
 
     // connect database & collection
     const oliviaSearvices = client.db("Olivia-Wilson-DB").collection("Olivia-Services");
+    // USer Info
+    const oliviaUserInfo = client.db("Olivia-Wilson-DB").collection("UserInfo");
     // Reviwes
     const oliviaReviews = client.db("Olivia-Wilson-DB").collection("reviews");
     // Team-Member
     const oliviaTeamMember = client.db("Olivia-Wilson-DB").collection("Team-Member");
+
+    //User-Order-Collection
+    const oliviaUserOrder = client.db("Olivia-Wilson-DB").collection("UserOrderData"); 
 
     // Services Get data & show display
     app.get('/services', async(req, res) => {
@@ -52,6 +57,23 @@ async function run() {
       res.send(result);
     })
 
+    // Post UserInfo Data
+    app.post('/usersInfo', async(req, res) => {
+      const user = req.body;
+      const result = await oliviaUserInfo.insertOne(user);
+      res.send(result);
+    });
+    // Get UserInfo
+    app.get('/usersInfo', async(req, res) => {
+      const result = await oliviaUserInfo.find().toArray();
+      res.send(result);
+    })
+
+    app.post('/userOrder', async(req, res) => {
+      const orderItem = req.body;
+      const result = await oliviaUserOrder.insertOne(orderItem);
+      res.send(result);
+    })
 
 
 
